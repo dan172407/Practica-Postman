@@ -3,6 +3,7 @@ const express = require('express');
 const helmet = require('helmet');
 const morgan = require('morgan');
 const { body, validationResult } = require('express-validator');
+const tareasRouter = require('./routes/tareas'); 
 
 const app = express();
 
@@ -69,5 +70,10 @@ app.post(
 app.get('/api/salud', (req, res) => {
   res.json({ status: 'ok' });
 });
+
+// =========================================================================
+// SESIÓN 2: Conexión de las rutas REST de Tareas
+// =========================================================================
+app.use('/api/tareas', tareasRouter); // <-- Conectamos el router
 
 module.exports = app;
