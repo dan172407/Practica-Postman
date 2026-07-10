@@ -4,7 +4,7 @@ const helmet = require('helmet');
 const morgan = require('morgan');
 const { body, validationResult } = require('express-validator');
 const tareasRouter = require('./routes/tareas'); 
-
+const climaRouter = require('./routes/clima');
 const app = express();
 
 app.use(helmet());              // cabeceras de seguridad HTTP
@@ -75,5 +75,7 @@ app.get('/api/salud', (req, res) => {
 // SESIÓN 2: Conexión de las rutas REST de Tareas
 // =========================================================================
 app.use('/api/tareas', tareasRouter); // <-- Conectamos el router
+app.use('/api/tareas', tareasRouter);
+app.use('/api/clima', climaRouter);
 
 module.exports = app;
