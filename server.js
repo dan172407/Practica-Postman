@@ -72,10 +72,16 @@ app.get('/api/salud', (req, res) => {
 });
 
 // =========================================================================
-// SESIÓN 2: Conexión de las rutas REST de Tareas
+// IMPORTACIÓN DE RUTAS Y MIDDLEWARE (SESIÓN 4)
 // =========================================================================
-app.use('/api/tareas', tareasRouter); // <-- Conectamos el router
-app.use('/api/tareas', tareasRouter);
-app.use('/api/clima', climaRouter);
+const authRouter = require('./routes/auth');
+const verificarToken = require('./middleware/auth');
+
+// 1. Rutas Públicas (Registro y Login)
+app.use('/api/auth', authRouter);           
+
+// 2. Rutas Protegidas con JWT (Llevan el middleware verificarToken)
+app.use('/api/tareas', verificarToken, tareasRouter);  
+app.use('/api/clima', verificarToken, climaRouter);    
 
 module.exports = app;
